@@ -49,9 +49,9 @@ end
 for i in 1 .. 1000
   puts summe1(i)
 end
-#for i in 0 .. 999
-#  puts summe2(10, 5)
-#end
-#for i in 0 .. 999
-#  puts summe3(10, 4.4)
-#end
+for i in 0 .. 999
+  puts summe2(10, 5)
+end
+for i in 0 .. 999
+  puts summe3(10, 4.4)
+end
