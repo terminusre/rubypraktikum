@@ -1,9 +1,24 @@
 class Caesar
-  
-  #TODO initialize
+  def initialize()
+  end
 
-  # TODO encode
+  def encode(string)
+    offset = 1
+    cipher = string.clone
+    for i in 0 .. cipher.length - 1
+      cipher[i] = (cipher[i].ord + offset).chr
+      if cipher[i].ord > 'Z'.ord
+        cipher[i] = (cipher[i].ord - 26).chr
+      end
+    end
+    return cipher
+  end
 end
+
+c = Caesar.new
+s = 'HALLOZ'
+puts c.encode(s)
+puts s
 
 #TODO die Klasse Caesar anwenden
 # plain.txt auslesen und kodieren. Das Ergebnis soll in encoded.txt stehen
