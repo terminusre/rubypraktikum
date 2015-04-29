@@ -26,7 +26,7 @@ def diamond(n)
   end
 end
 
-puts 'Bitte geben Sie eine ungerade natuerliche Zahl, nach der ein Diamand erstellt wird, an!'
+puts 'Bitte geben Sie eine ungerade natuerliche Zahl, nach der ein Diamant erstellt wird, an!'
 diamand(gets.chomp.to_i)
 
 diamond(1)

@@ -14,7 +14,7 @@ def grades(notenpunkte)
   puts ergebnis
 end
 
-puts 'Bitte geben Sie eine  Zahl zwischen 0 und 15, die ein eine Zensur umgewandelt wird, an!'
+puts 'Bitte geben Sie eine Zahl zwischen 0 und 15, die in eine Zensur umgewandelt wird, an!'
 diamand(gets.chomp.to_i)
   
 grades(0)
