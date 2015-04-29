@@ -1,11 +1,9 @@
 def teilersumme(n)
   ergebnis = 0
-  i = 1
-  while i < (n / 2) + 1
+  for i in 1 .. (n / 2)
     if n % i == 0
       ergebnis = ergebnis + i
     end
-    i = i + 1
   end
   return ergebnis
 end
@@ -13,12 +11,10 @@ end
 def ausgabe_der_teiler(n)
   # Berechnung
   ergebnis = []
-  i = 1
-  while i < (n / 2) + 1
+  for i in 1 .. (n / 2)
     if n % i == 0
       ergebnis.push(i)
     end
-    i = i + 1
   end
   # Ausgabe
   print n.to_s + ' = ' + ergebnis[0].to_s
@@ -38,7 +34,7 @@ def perfekt?(n)
 end
 
 puts "Bitte geben sie eine Zahl ein"
-eingabe = 6#gets.chomp.to_i
+eingabe = gets.chomp.to_i # 6
 puts perfekt?(eingabe)
 gefundene_zahlen = 0
 while gefundene_zahlen < 3
