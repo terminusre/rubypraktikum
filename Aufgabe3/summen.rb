@@ -46,13 +46,9 @@ def summe3_nenner(i, x)
   end
   return ergebnis
 end
-#
-#for i in 1 .. 1000
-#  puts summe1(i)
-#end
-#for i in 1 .. 1000
-#  puts summe2(i, 5)
-#end
+
 for i in 1 .. 1000
+  #  puts summe1(i)
+  #  puts summe2(i, 5)
   puts summe3(i, 5.5)
 end
