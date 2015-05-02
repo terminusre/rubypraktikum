@@ -41,15 +41,15 @@ while eingabe != 'x'
   when '-'
     x = x - y
   when '*'
-    puts '*'
+    x = x * y
   when '/'
-    puts '/'
+    x = y / x
   when '--'
-    puts '--'
+    x = x.neg
   when '//'
-    puts '//'
+    x = x.reziprok
   when '**'
-    puts '**'
+    x = x * x
   when 'x'
     break
   else
