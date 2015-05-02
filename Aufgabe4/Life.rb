@@ -53,9 +53,9 @@ class Life
           # Eine lebende Zelle mit mehr als drei lebenden Nachbarn stirbt in der Nachfolgegeneration an Überbevölkerung.
         elsif @zellen[zeile][spalte].lebendig? && lebendige_nachbarn > 3
           zellen_der_naechsten_generation[zeile].push(Zelle.new(p, zeile, spalte, 20, false))
+          # Mit dem Rest passiert nichts.
         else
-          # Wenn eine Zelle tod ist und weniger als 3 Nachbarn hat, passiert nichts.
-          zellen_der_naechsten_generation[zeile].push(Zelle.new(p, zeile, spalte, 20, false))
+          zellen_der_naechsten_generation[zeile].push(Zelle.new(p, zeile, spalte, 20, @zellen[zeile][spalte].lebendig?))
         end
       end
     end
