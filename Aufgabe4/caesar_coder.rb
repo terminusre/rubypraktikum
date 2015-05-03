@@ -3,71 +3,52 @@ class Caesar
     @d = d
   end
 
-  def encode(character)
-    if @d < 0
-      offset = @d + 26
+  def encode(byte)
+    if byte >= 'A'.ord && byte <= 'Z'.ord
+      return (((byte % 'A'.ord) + 26 + @d) % 26) + 'A'.ord
     else
-      offset = @d
+      return byte
     end
-    if character >= 'A'.ord && character <= 'Z'.ord
-      encoded_character = character.ord + offset
-      if encoded_character > 'Z'.ord
-        encoded_character = encoded_character.ord - 26
-      end
-    else
-      encoded_character = character
-    end
-    return encoded_character
-  end
-
-  def decode(character)
-    if @d < 0
-      offset = @d + 26
-    else
-      offset = @d
-    end
-    if character >= 'A'.ord && character <= 'Z'.ord
-      decoded_character = character.ord - offset
-      if decoded_character < 'A'.ord
-        decoded_character = decoded_character.ord + 26
-      end
-    else
-      decoded_character = character
-    end
-    return decoded_character
   end
 end
 
-caesar = Caesar.new(3)
+def read(file_name)
+  byte_array = []
+  File.open(file_name,'r') {|file_reader|
+    file_reader.each_byte(){|byte| byte_array.push(byte)}
+  }
+  return byte_array
+end
+
+def write(file_name, byte_array)
+  File.open(file_name,'w') {|file_writer|
+    byte_array.each{|byte|
+      file_writer << byte.chr}
+  }
+end
+
+def print_byte_array(byte_array)
+  byte_array.each do |byte|
+    print byte.chr
+  end
+  puts
+end
+
+def encode(byte_array, d)
+  caesar = Caesar.new(d)
+  byte_array.collect! do |byte|
+    caesar.encode(byte)
+  end
+end
 
 # encode file
-byte_array = []
-File.open('plain.txt','r') {|file_reader|
-  file_reader.each_byte(){|byte| byte_array.push(byte)}
-}
-encoded_byte_array = []
-byte_array.each do |byte|
-  encoded_byte_array.push(caesar.encode(byte))
-end
-File.open('encoded.txt','w') {|file_writer|
-  encoded_byte_array.each{|byte|
-    print byte.chr
-    file_writer << byte.chr}
-}
-puts
+data = read('plain.txt')
+encode(data, 3)
+print_byte_array(data)
+write('encoded.txt', data)
 
 # decode file
-byte_array = []
-File.open('encoded.txt','r') {|file_reader|
-  file_reader.each_byte(){|byte| byte_array.push(byte)}
-}
-decoded_byte_array = []
-byte_array.each do |byte|
-  decoded_byte_array.push(caesar.decode(byte))
-end
-File.open('decoded.txt','w') {|file_writer|
-  decoded_byte_array.each{|byte|
-    print byte.chr
-    file_writer << byte.chr}
-}
-puts
+data = read('encoded.txt')
+encode(data, -3)
+print_byte_array(data)
+write('decoded.txt', data)

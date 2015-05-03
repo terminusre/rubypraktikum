@@ -28,21 +28,24 @@ class ReplizierterString
     return false
   end
 
-  def vielfaches(prefix, string, counter)
-    if string == '' && counter > 1
-      return counter
-    elsif string.start_with?(prefix)
-      return vielfaches(prefix, string[prefix.length .. -1], counter + 1)
-    else
-      return false
+  def vielfaches(prefix, string)
+    def vielfaches_rekursiv(prefix, string, counter)
+      if string == '' && counter > 1
+        return counter
+      elsif string.start_with?(prefix)
+        return vielfaches_rekursiv(prefix, string[prefix.length .. -1], counter + 1)
+      else
+        return false
+      end
     end
+    return vielfaches_rekursiv(prefix, string, 0)
   end
 
   def normalized?
     check_string = ''
     for i in 0 .. (@wort.length / 2) - 1
       check_string += @wort[i]
-      if vielfaches(check_string, @wort, 0)
+      if vielfaches(check_string, @wort)
         return false
       end
     end
@@ -53,7 +56,7 @@ class ReplizierterString
     check_string = ''
     for i in 0 .. (@wort.length / 2) - 1
       check_string += @wort[i]
-      faktor = vielfaches(check_string, @wort, 0)
+      faktor = vielfaches(check_string, @wort)
       if faktor
         @zaehler *= faktor
         @wort = check_string
