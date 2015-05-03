@@ -27,9 +27,8 @@ class ReplizierterString
   def normalized?
     check_string = ''
     for i in 0 .. (@wort.length / 2) - 1
-      wort = @wort
       check_string += @wort[i]
-      if wort.gsub( /#{check_string}/, '') == ''
+      if @wort.gsub(/#{check_string}/, '') == ''
         return false
       end
     end
@@ -39,13 +38,10 @@ class ReplizierterString
   def normalize
     check_string = ''
     for i in 0 .. (@wort.length / 2) - 1
-      wort = @wort
       check_string += @wort[i]
-      if wort.gsub( /#{check_string}/, '') == ''
-        wort = @wort
-        subworte = wort.scan( /#{check_string}/)
-        @wort = subworte[0]
-        @zaehler *= subworte.length
+      if @wort.gsub(/#{check_string}/, '') == ''
+        @zaehler *= @wort.scan(/#{check_string}/).length
+        @wort = check_string
         break
       end
     end
@@ -67,10 +63,15 @@ class ReplizierterString
 
   def <(other_rep_string)
     if other_rep_string != ''
-      return other_rep_string.to_s[0 .. other_rep_string.to_s().length - 2].start_with?(self.to_s)
-    else
-      return false
+      checkstring = other_rep_string.wort
+      if checkstring.length < @wort.length
+        checkstring += checkstring
+      end
+      if checkstring.start_with?(@wort) && @wort.length * @zaehler < other_rep_string.wort.length * other_rep_string.zaehler
+        return true
+      end
     end
+    return false
   end
 
 end
