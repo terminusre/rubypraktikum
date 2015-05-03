@@ -77,9 +77,9 @@ class ReplizierterString
   end
 
   def <(other_rep_string)
-    if other_rep_string != ''
+    if other_rep_string.wort != ''
       checkstring = other_rep_string.wort
-      if checkstring.length < @wort.length
+      while checkstring.length < @wort.length
         checkstring += checkstring
       end
       if checkstring.start_with?(@wort) && @wort.length * @zaehler < other_rep_string.wort.length * other_rep_string.zaehler
