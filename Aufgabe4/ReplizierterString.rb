@@ -1,18 +1,11 @@
 class ReplizierterString
+  attr_reader :wort, :zaehler
   def initialize(wort, zaehler)
     if zaehler < 0
       raise ArgumentError, 'Der Zaehler ist negativ!', caller
     end
     @wort = wort
     @zaehler = zaehler
-  end
-
-  def wort
-    return @wort
-  end
-
-  def zaehler
-    return @zaehler
   end
 
   def kopieren
