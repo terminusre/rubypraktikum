@@ -25,10 +25,10 @@ class ReplizierterString
   end
 
   def vielfaches(prefix, string, counter)
-    if string.start_with?(prefix)
-      vielfaches(prefix, string[prefix.length .. -1], counter + 1)
-    elsif string == '' && counter > 0
+    if string == '' && counter > 1
       return counter
+    elsif string.start_with?(prefix)
+      return vielfaches(prefix, string[prefix.length .. -1], counter + 1)
     else
       return false
     end
