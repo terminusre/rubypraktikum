@@ -1,7 +1,18 @@
 class ReplizierterString
   def initialize(wort, zaehler)
+    if zaehler < 0
+      raise ArgumentError, 'Der Zaehler ist negativ!', caller
+    end
     @wort = wort
     @zaehler = zaehler
+  end
+
+  def wort
+    return @wort
+  end
+
+  def zaehler
+    return @zaehler
   end
 
   def kopieren
@@ -14,7 +25,6 @@ class ReplizierterString
       absoluter_string = absoluter_string + @wort
     end
     return absoluter_string
-    #    return @wort + ' * ' + @zaehler.to_s
   end
 
   def ==(other_rep_string)
@@ -55,12 +65,19 @@ class ReplizierterString
   end
 
   def +(wert)
+    if @zaehler + wert < 0
+      raise ArgumentError, 'Der Zaehler wird durch diesen Wert negativ!', caller
+    end
     @zaehler += wert
     return self
   end
 
   def <(other_rep_string)
-    return other_rep_string.to_s[0 .. other_rep_string.to_s().length - 2].start_with?(self.to_s)
+    if other_rep_string != ''
+      return other_rep_string.to_s[0 .. other_rep_string.to_s().length - 2].start_with?(self.to_s)
+    else
+      return false
+    end
   end
 
 end
