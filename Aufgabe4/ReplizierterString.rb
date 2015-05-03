@@ -21,7 +21,11 @@ class ReplizierterString
   end
 
   def ==(other_rep_string)
-    return self.to_s == other_rep_string.to_s
+    if other_rep_string.is_a?(ReplizierterString)
+      return ((self < (other_rep_string.clone + 1)) && (@wort.length * @zaehler == other_rep_string.wort.length * other_rep_string.zaehler)) ||
+      (@wort.length * @zaehler == 0 && other_rep_string.wort.length * other_rep_string.zaehler == 0)
+    end
+    return false
   end
 
   def vielfaches(prefix, string, counter)
