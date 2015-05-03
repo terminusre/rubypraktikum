@@ -1,6 +1,6 @@
 require 'MyRational'
 
-def zahl?(string)
+def get_number(string)
   begin
     return Integer(string)
   rescue
@@ -8,18 +8,18 @@ def zahl?(string)
   end
 end
 
-def bruch?(string)
+def get_MyRational(string)
   index_bruchstrich = string.index('/')
   if index_bruchstrich != nil
-    zaehler = zahl?(string[0 .. index_bruchstrich - 1])
-    nenner = zahl?(string[index_bruchstrich + 1 .. string.length - 1])
+    zaehler = get_number(string[0 .. index_bruchstrich - 1])
+    nenner = get_number(string[index_bruchstrich + 1 .. - 1])
     if zaehler && nenner
       return MyRational.new(zaehler, nenner)
     else
       return false
     end
   else
-    zaehler = zahl?(string)
+    zaehler = get_number(string)
     if zaehler
       return MyRational.new(zaehler, 1)
     else
@@ -53,15 +53,16 @@ while eingabe != 'x'
   when 'x'
     break
   else
-    zahl = bruch?(eingabe)
-    if zahl
+    bearbeitete_eingabe = get_MyRational(eingabe)
+    if bearbeitete_eingabe
       y = x
-      x = zahl
+      x = bearbeitete_eingabe
     else
-      puts 'Das ist keine gueltige Eingabe, Dummkopf!'
+      puts 'Das ist keine gueltige Eingabe!'
     end
   end
 
   puts 'x = ' + x.to_s
   puts 'y = ' + y.to_s
+
 end

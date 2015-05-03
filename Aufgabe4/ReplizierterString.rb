@@ -24,9 +24,9 @@ class ReplizierterString
     return self.to_s == other_rep_string.to_s
   end
 
-  def vielfaches?(prefix, string, counter)
+  def vielfaches(prefix, string, counter)
     if string.start_with?(prefix)
-      vielfaches?(prefix, string[prefix.length .. -1], counter + 1)
+      vielfaches(prefix, string[prefix.length .. -1], counter + 1)
     elsif string == '' && counter > 0
       return counter
     else
@@ -38,7 +38,7 @@ class ReplizierterString
     check_string = ''
     for i in 0 .. (@wort.length / 2) - 1
       check_string += @wort[i]
-      if vielfaches?(check_string, @wort, 0)
+      if vielfaches(check_string, @wort, 0)
         return false
       end
     end
@@ -49,8 +49,9 @@ class ReplizierterString
     check_string = ''
     for i in 0 .. (@wort.length / 2) - 1
       check_string += @wort[i]
-      if vielfaches?(check_string, @wort, 0)
-        @zaehler *= vielfaches?(check_string, @wort, 0)
+      faktor = vielfaches(check_string, @wort, 0)
+      if faktor
+        @zaehler *= faktor
         @wort = check_string
         break
       end
