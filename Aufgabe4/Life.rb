@@ -6,7 +6,7 @@ class Life
     muster = [
       [[0, 1], [1, 1]],
       [[1, 2], [2, 3], [3, 1], [3, 2], [3, 3]],
-      [[0, 0], [5, 5]]
+      [[0, 0], [0, 5], [5, 0], [5, 5]]
     ]
     @muster = muster[muster_index]
 
@@ -22,10 +22,13 @@ class Life
 
     p = Point.new(10, 10)
     @zellen = []
+    @zellen_naechste_generation = []
     for zeile in 0 .. n - 1
       @zellen.push([])
+      @zellen_naechste_generation.push([])
       for spalte in 0 .. n - 1
         @zellen[zeile].push(Zelle.new(p, zeile, spalte, 20, @muster.include?([zeile, spalte]) ? true : false))
+        @zellen_naechste_generation[zeile].push(Zelle.new(p, zeile, spalte, 20, false))
       end
     end
 
@@ -33,34 +36,35 @@ class Life
   end
 
   def naechste_generation
-    zellen_der_naechsten_generation = []
     n = @zellen.length
-    p = Point.new(10, 10)
 
     for zeile in 0 .. n - 1
-      zellen_der_naechsten_generation.push([])
       for spalte in 0 .. n - 1
         lebendige_nachbarn = lebende_nachbar_zellen(zeile, spalte)
         # Eine tote Zelle mit 3 lebenden Nachbarn wird neu geboren.
         if !@zellen[zeile][spalte].lebendig? && lebendige_nachbarn == 3
-          zellen_der_naechsten_generation[zeile].push(Zelle.new(p, zeile, spalte, 20, true))
+          @zellen_naechste_generation[zeile][spalte].leben
           # Eine lebende Zelle mit weniger als zwei lebenden Nachbarn stirbt in der nachfolgenden Generation.
         elsif @zellen[zeile][spalte].lebendig? && lebendige_nachbarn < 2
-          zellen_der_naechsten_generation[zeile].push(Zelle.new(p, zeile, spalte, 20, false))
-          # Eine lebende Zelle mit zwei oder drei lebenden Nachbarn überlebt in der Nachfolgegeneration.
+          @zellen_naechste_generation[zeile][spalte].sterben
+          # Eine lebende Zelle mit zwei oder drei lebenden Nachbarn Ã¼berlebt in der Nachfolgegeneration.
         elsif @zellen[zeile][spalte].lebendig? && lebendige_nachbarn < 4 && lebendige_nachbarn > 1
-          zellen_der_naechsten_generation[zeile].push(Zelle.new(p, zeile, spalte, 20, true))
-          # Eine lebende Zelle mit mehr als drei lebenden Nachbarn stirbt in der Nachfolgegeneration an Überbevölkerung.
+          @zellen_naechste_generation[zeile][spalte].leben
+          # Eine lebende Zelle mit mehr als drei lebenden Nachbarn stirbt in der Nachfolgegeneration an ÃœberbevÃ¶lkerung.
         elsif @zellen[zeile][spalte].lebendig? && lebendige_nachbarn > 3
-          zellen_der_naechsten_generation[zeile].push(Zelle.new(p, zeile, spalte, 20, false))
+          @zellen_naechste_generation[zeile][spalte].sterben
           # Mit dem Rest passiert nichts.
+        elsif @zellen[zeile][spalte].lebendig?
+          @zellen_naechste_generation[zeile][spalte].leben
         else
-          zellen_der_naechsten_generation[zeile].push(Zelle.new(p, zeile, spalte, 20, @zellen[zeile][spalte].lebendig?))
+          @zellen_naechste_generation[zeile][spalte].sterben
         end
       end
     end
 
-    @zellen = zellen_der_naechsten_generation
+    container = @zellen
+    @zellen = @zellen_naechste_generation
+    @zellen_naechste_generation = container
     sichtbar_machen
   end
 
@@ -117,7 +121,7 @@ class Life
   # Vorgegebene Methode der Klasse Life
   #
   #
-  # Simuliert die Entwicklung der Generationen des Game Of Life für n - Wiederholungen
+  # Simuliert die Entwicklung der Generationen des Game Of Life fÃ¼r n - Wiederholungen
   #
   # Dazu wird alle 10 ms die Folgegeneration mit Hilfe der Methode
   # naechste_generation berechnet und dargestellt
