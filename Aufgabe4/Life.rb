@@ -88,16 +88,16 @@ class Life
   end
 
   def unsichtbar_machen
-    @zellen.each do |zellenspalte|
-      zellenspalte.each do |zelle|
+    @zellen.each do |zellenzeile|
+      zellenzeile.each do |zelle|
         zelle.unsichtbar_machen
       end
     end
   end
 
   def sichtbar_machen
-    @zellen.each do |zellenspalte|
-      zellenspalte.each do |zelle|
+    @zellen.each do |zellenzeile|
+      zellenzeile.each do |zelle|
         zelle.sichtbar_machen
       end
     end
