@@ -15,7 +15,7 @@ class ReplizierterString
   def to_s
     absoluter_string = ''
     for i in 0 .. @zaehler - 1
-      absoluter_string = absoluter_string + @wort
+      absoluter_string += @wort
     end
     return absoluter_string
   end
@@ -67,7 +67,7 @@ class ReplizierterString
   end
 
   def <<(a_string)
-    @wort = @wort + a_string
+    @wort += a_string
     return self
   end
 
