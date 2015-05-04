@@ -15,7 +15,8 @@ end
 def read(file_name)
   byte_array = []
   File.open(file_name,'r') {|file_reader|
-    file_reader.each_byte(){|byte| byte_array.push(byte)}
+    file_reader.each_byte(){|byte|
+      byte_array.push(byte)}
   }
   return byte_array
 end
