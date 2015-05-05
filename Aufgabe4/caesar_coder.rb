@@ -1,11 +1,14 @@
 class Caesar
   def initialize(d)
+    if d < -26 || d > 26
+      raise ArgumentError, 'Der Abstand d muss im offenen Intervall (-26,26) liegen!', caller
+    end
     @d = d
   end
 
   def encode(byte)
     if byte >= 'A'.ord && byte <= 'Z'.ord
-      return (((byte % 'A'.ord) + 26 + @d) % 26) + 'A'.ord
+      return (((byte - 'A'.ord) + 26 + @d) % 26) + 'A'.ord
     else
       return byte
     end
