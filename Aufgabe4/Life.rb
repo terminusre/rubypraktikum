@@ -3,9 +3,25 @@ require "Point"
 
 class Life
   def initialize(n, muster_index)
+    case
+    when muster_index == 0 && n < 4
+      raise ArgumentError, 'Um dieses Muster korrekt darzustellen, muss die Spielfeldgroesse mindestens 4*4 entsprechen!', caller
+    when muster_index == 1 && n < 7
+      raise ArgumentError, 'Um dieses Muster korrekt darzustellen, muss die Spielfeldgroesse mindestens 7*7 entsprechen!', caller
+    when muster_index == 2 && n < 12
+      raise ArgumentError, 'Um dieses Muster korrekt darzustellen, muss die Spielfeldgroesse mindestens 12*12 entsprechen!', caller
+    when muster_index < 0 || muster_index > 2
+      raise ArgumentError, 'Dieses Muster existiert nicht! Geben Sie einen Index zwischen 0 und 2 an!', caller
+    end
+    
     muster = [
-      [[0, 1], [1, 1]],
-      [[1, 2], [2, 3], [3, 1], [3, 2], [3, 3]],
+      [[1, 2], [2, 3], [3, 1], [3, 2], [3, 3]], # repeats every 20 generations
+      # The Lightweight Spaceship (glider 1062) from http://fano.ics.uci.edu/ca/rules/b3s23/g3.html
+      [[2, 3], [2, 6], [3, 2], [4, 2], [4, 6], [5, 2], [5, 3], [5, 4], [5, 5]], # repeats every 4 generations
+      # The Coe Ship (glider 9153) from http://fano.ics.uci.edu/ca/rules/b3s23/g4.html
+      [[2, 3], [2, 8], [2, 9], [2, 10], [3, 2], [3, 3], [3, 4], [3, 7], [3, 10],
+      [4, 2], [4, 4], [4, 5], [4, 10], [5, 3], [5, 4], [5, 5], [5, 6], [5, 10],
+      [6, 3], [6, 4], [6, 10], [7, 7], [7, 10], [8, 8], [8, 9], [9, 9], [10, 8], [11, 8]], # repeats every 16 generations
       [[0, 0], [0, 5], [5, 0], [5, 5]]
     ]
     @muster = muster[muster_index]
