@@ -1,7 +1,8 @@
 class Field
+  attr_reader :n
   def initialize(n)
     if !n.integer? || n < 0
-      raise ArgumentError, 'n muss ein Element von N+ sein!', caller
+      raise ArgumentError, 'n has to be an element of N+', caller
     end
     @n = n
     @field = []
@@ -12,17 +13,20 @@ class Field
         @field[row].push(rand(100))
       end
     end
-    
+
     # set start
-    @field[1][1] = 's'
+    @field[1][2] = 's'
     # set goal
-    @field[@n - 2][@n - 2] = 'f'
-      
+    @field[@n - 2][@n - 2] = 'g'
+
     @grid = grid(@n)
-    to_s
   end
 
-  def get_entry(row, column, entry_length)
+  def [](row, column)
+    return @field[row][column]
+  end
+  
+  def generate_grid_entry(row, column, entry_length)
     string = @field[row][column].to_s
     if string.length == entry_length
       return string
@@ -49,7 +53,7 @@ class Field
         elsif column % (entry_length + 1) == 0
           grid[row] += '|'
         else
-          grid[row] += get_entry(row / 2, column / (entry_length + 1), entry_length)
+          grid[row] += generate_grid_entry(row / 2, column / (entry_length + 1), entry_length)
           column += entry_length - 1
         end
         column += 1
@@ -58,16 +62,11 @@ class Field
     return grid
   end
 
-  def update_grid
-
-  end
-
   def to_s
-    update_grid
+    string = ''
     @grid.each do |row|
-      puts  row
+      string += row + "\n"
     end
+    return string
   end
 end
-
-field = Field.new(5)
