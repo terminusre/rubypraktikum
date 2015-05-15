@@ -13,7 +13,7 @@ class Life
     when muster_index < 0 || muster_index > 2
       raise ArgumentError, 'Dieses Muster existiert nicht! Geben Sie einen Index zwischen 0 und 2 an!', caller
     end
-    
+
     muster = [
       [[1, 2], [2, 3], [3, 1], [3, 2], [3, 3]], # repeats every 20 generations
       # The Lightweight Spaceship (glider 1062) from http://fano.ics.uci.edu/ca/rules/b3s23/g3.html
@@ -143,7 +143,7 @@ class Life
   # naechste_generation berechnet und dargestellt
   #
   def simuliere(schritte)
-    TkTimer.new(10,schritte, proc{
+    TkTimer.new(30,schritte, proc{
       naechste_generation()
     }).start(0, proc{})
   end

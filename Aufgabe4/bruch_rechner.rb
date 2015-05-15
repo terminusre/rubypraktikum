@@ -9,7 +9,7 @@ def get_number(string)
 end
 
 def get_MyRational(string)
-  index_bruchstrich = string.index('/')
+  index_bruchstrich = string.index('/') #.split
   if index_bruchstrich != nil
     zaehler = get_number(string[0 .. index_bruchstrich - 1])
     nenner = get_number(string[index_bruchstrich + 1 .. - 1])

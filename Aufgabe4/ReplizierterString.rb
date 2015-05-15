@@ -45,7 +45,7 @@ class ReplizierterString
     check_string = ''
     for i in 0 .. (@wort.length / 2) - 1
       check_string += @wort[i]
-      if vielfaches(check_string, @wort)
+      if vielfaches(check_string, @wort) # ts * (wort.size/ts.size) == wort
         return false
       end
     end
@@ -67,7 +67,7 @@ class ReplizierterString
   end
 
   def <<(a_string)
-    @wort += a_string
+    @wort << a_string
     return self
   end
 
@@ -79,7 +79,7 @@ class ReplizierterString
     return self
   end
 
-  def <(other_rep_string)
+  def <(other_rep_string) #normalisieren
     if other_rep_string.wort != ''
       checkstring = other_rep_string.wort
       while checkstring.length < @wort.length
