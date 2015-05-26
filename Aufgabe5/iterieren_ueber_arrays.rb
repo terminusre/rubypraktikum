@@ -2,15 +2,16 @@ def sin_auf_array(ary)
   return ary.map{ |i| Math::sin(i)}
 end
 
-def kreuzprodukt(ary1,ary2)
+def kreuzprodukt(ary1, ary2)
   ary = []
-  ary1.each{ |element1|
-    if ary2 != []
+  if ary2 != []
+    ary1.each{ |element1|
       ary2.each { |element2|
         ary.push([element1, element2])
       }
-    end
-  }
+
+    }
+  end
   return ary
 end
 
