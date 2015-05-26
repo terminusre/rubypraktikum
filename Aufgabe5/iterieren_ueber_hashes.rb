@@ -1,23 +1,20 @@
 def max_key(a_hash)
-  # TODO 
+  return a_hash.keys.max
 end
 
 def max_value(a_hash)
-  #TODO 
+  return a_hash.values.max
 end
 
 def count_max_values(a_hash)
-  # TODO
+  return a_hash.values.count(max_value(a_hash))
 end
 
 def key_value_sum_even(a_hash)
-  # TODO
+  return a_hash.select { |key, value|
+    (key + value) % 2 == 0
+  }
 end
-
-def key_value_sum_even(a_hash)
-  # TODO
-end
-
 
 h = {:a=> 7, :b=> 11, :c=> 6, :d=> 11, :e=> 11, :f => 9}
 puts count_max_values({:a=> 7, :b=> 11, :c=> 6, :d=> 11, :e=> 11, :f => 9})
