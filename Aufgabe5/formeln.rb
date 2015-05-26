@@ -9,6 +9,7 @@
    }
    
  end
+ 
 # TODO approx_1_halb
  def approx_1_halb(i)
    return (0..i).inject{|sum,i|
@@ -17,6 +18,7 @@
    
    }
  end
+ 
 # TODO approx_ln(x,n)
  def approx_ln(x,n)
    return (0..n).inject{|sum,i|
