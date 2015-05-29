@@ -1,4 +1,4 @@
-def summe1(i)
+def approx_2(i)
   if i.integer? && i > 0
     return (0..i+1).inject {|sum, i|
       sum+(1/(2.0**(i-1)))
@@ -28,6 +28,6 @@ def approx_ln(x, n)
   end
 end
 
-puts summe1(1)
-puts approx_1_halb(50)
-puts approx_ln(1.1,5)
+puts 'Approximiere 2: ' + approx_2(100).to_s
+puts 'Approximiere 1/2: ' + approx_1_halb(50).to_s
+puts 'Approximiere ln: ' + approx_ln(1.1,5).to_s

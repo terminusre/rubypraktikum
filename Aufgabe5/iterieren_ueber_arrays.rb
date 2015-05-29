@@ -3,20 +3,11 @@ def sin_auf_array(ary)
 end
 
 def kreuzprodukt(ary1, ary2)
-  ary = []
-  if ary2 != []
-    ary1.each{ |element1|
-      ary2.each { |element2|
-        ary.push([element1, element2])
-      }
-
-    }
-  end
-  return ary
+  return ary1.product(ary2)
 end
 
 def durch_drei_teilbar_und_groesser_als_sieben(array)
-  return array.map{ |number| ((number % 3 == 0) && (number > 7)) }.reduce(:&)
+  return array.all?{|number| ((number % 3 == 0) && (number > 7))}
 end
 
 def gerade_und_groesser_null(array)

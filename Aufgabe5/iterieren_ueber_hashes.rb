@@ -11,9 +11,7 @@ def count_max_values(a_hash)
 end
 
 def key_value_sum_even(a_hash)
-  return a_hash.select { |key, value|
-    (key + value) % 2 == 0
-  }
+  return a_hash.select { |key, value| (key + value) % 2 == 0 }
 end
 
 h = {:a=> 7, :b=> 11, :c=> 6, :d=> 11, :e=> 11, :f => 9}

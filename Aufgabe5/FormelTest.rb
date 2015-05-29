@@ -3,19 +3,19 @@ require "test/unit"
 
 class FormelTest < Test::Unit::TestCase
   def setup()
-    @anzahl_iterationen = 100
+    @anzahl_iterationen = 100000
     @wert0 = 0.1
     @wert1 = 1.0
     @wert2 = 2.0
-    @epsilon = 0.1# 1*e-10
+    @epsilon = 1*(10**(-5))
   end
 
   def test_wrong_arguments
-    assert(approx_ln(0.0, 1) == -99, 'f')
-    assert(approx_ln(2.1, 1) == -99, 'f')
-    assert(approx_ln(1.0, 1) == -99, 'f')
-    assert(approx_ln(1.0, 1.0) == -99, 'f')
-    assert(approx_ln(1, 1) == -99, 'f')
+    assert(approx_ln(0.0, 1) == -99, 'falsche Parameter')
+    assert(approx_ln(2.1, 1) == -99, 'falsche Parameter')
+    assert(approx_ln(1.0, 1) == -99, 'falsche Parameter')
+    assert(approx_ln(1.0, 1.0) == -99, 'falsche Parameter')
+    assert(approx_ln(1, 1) == -99, 'falsche Parameter')
   end
 
   def test_ln
