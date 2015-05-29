@@ -1,5 +1,5 @@
 def max_key(a_hash)
-  return a_hash.keys.max
+  return a_hash.max()[0]
 end
 
 def max_value(a_hash)
