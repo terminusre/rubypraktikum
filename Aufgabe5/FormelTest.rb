@@ -3,7 +3,7 @@ require "test/unit"
 
 class FormelTest < Test::Unit::TestCase
   def setup()
-    @anzahl_iterationen = 10000000
+    @anzahl_iterationen = 100000
     @wert0 = 0.1
     @wert1 = 1.0
     @wert2 = 2.0
