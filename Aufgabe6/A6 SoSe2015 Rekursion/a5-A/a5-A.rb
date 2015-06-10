@@ -16,9 +16,20 @@ def ln(x, n)
   end
 end
 
-def a(n,m)
+def a(n, m)
+  if n == 0
+    return m + 1
+  elsif m == 0
+    return a(n - 1, 1)
+  else
+    return a(n - 1, a(n, m - 1))
+  end
 end
+
 
 #puts f(100)
 #puts Math::log(10)
 #puts ln(10,100)
+#for i in 3 .. 100
+#  puts a(i, i)
+#end
