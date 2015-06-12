@@ -5,7 +5,7 @@ def f_test()
   zaehler = 0
   while abweichung > 0.000001
     zaehler += 1
-    abweichung = 0.25 - f(zaehler)
+    abweichung = (0.25 - f(zaehler)).abs # Betrag
   end
   puts 'Die Abweichung betraegt ' + abweichung.to_s + ' im ' + zaehler.to_s + '. Durchlauf.'
 end
@@ -16,9 +16,9 @@ def ln_test(x)
   ln2 = Math::log(2)
   abweichung = 1
   zaehler = 0
-  while abweichung > 10**-15
+  while abweichung > 1e-15 #10**-15
     zaehler += 1
-    abweichung = ln2 - ln(2, zaehler)
+    abweichung = (ln2 - ln(2, zaehler)).abs
   end
   puts 'Die Abweichung betraegt ' + abweichung.to_s + ' im ' + zaehler.to_s + '. Durchlauf.'
 

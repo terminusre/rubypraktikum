@@ -1,14 +1,14 @@
 def ln(n, x, speicher = 0)
-  if n == 1
-    return speicher + ((x - 1) / x)
+  if n < 1
+    return speicher
   else
     return ln(n - 1, x, speicher + ((x - 1) ** n) / (n * (x ** n)))
   end
 end
 
 def f(n, x, speicher = 0)
-  if n == 0
-    return speicher + 1
+  if n < 0
+    return speicher
   else
     return f(n - 1, x, speicher + (((-1) ** n) * (n + 1) * (x ** n)))
   end

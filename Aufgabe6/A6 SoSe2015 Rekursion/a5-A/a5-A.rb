@@ -42,7 +42,7 @@ def test_Ackermann_3m
   end
 end
 
-#test_Ackermann_3m
+#test_Ackermann
 #test_Ackermann_3m
 
 #puts f(100)
