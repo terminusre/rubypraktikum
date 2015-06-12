@@ -11,7 +11,7 @@ class RekursiverBaum
   BAUM1_LAENGE = 100
   BAUM2_LAENGE = 100
   BAUM3_LAENGE = 50
-  BAUM1_BREITE = 1
+  BAUM1_BREITE = 10
   BAUM2_BREITE = BAUM1_BREITE
   BAUM3_BREITE = BAUM1_BREITE
   BAUM1_WINKEL = 24.8
@@ -45,43 +45,64 @@ class RekursiverBaum
       @turtle.go_ahead(laenge,breite)
       return
     end
-    baum1(n-1,winkel,laenge/@factor,breite)                # F
+    @turtle.go_ahead(laenge,breite)                        # F
     @turtle.remember                                       # [
     @turtle.turn_left(winkel)                              # +
-    baum1(n-1,winkel,laenge/@factor,breite)                # X
+    baum1(n-1,winkel,laenge/@factor,breite/@factor)        # X
     @turtle.restore                                        # ]
-    baum1(n-1,winkel,laenge/@factor,breite)                # F
+    @turtle.go_ahead(laenge,breite)                        # F
     @turtle.remember                                       # [
     @turtle.turn_right(winkel)                             # -
-    baum1(n-1,winkel,laenge/@factor,breite)                # X
+    baum1(n-1,winkel,laenge/@factor,breite/@factor)        # X
     @turtle.restore                                        # ]
     @turtle.turn_left(winkel)                              # +
-    baum1(n-1,winkel,laenge/@factor,breite)                # X
-
-    #    if n == 0
-    #      @turtle.go_ahead(laenge,breite)
-    #      return
-    #    end
-    #    baum1(n-1,winkel,laenge/@factor,breite)                # F
-    #    @turtle.remember                                       # [
-    #    @turtle.turn_left(winkel)                              # +
-    #    baum1(n-1,winkel,laenge/@factor,breite)                # F
-    #    @turtle.restore                                        # ]
-    #    baum1(n-1,winkel,laenge/@factor,breite)                # F
-    #    @turtle.remember                                       # [
-    #    @turtle.turn_right(winkel)                             # -
-    #    baum1(n-1,winkel,laenge/@factor,breite)                # F
-    #    @turtle.restore                                        # ]
-    #    @turtle.turn_left(winkel)                              # +
-    #    baum1(n-1,winkel,laenge/@factor,breite)                # F
+    baum1(n-1,winkel,laenge/@factor,breite/@factor)        # X
   end
 
   # P = {X-> F[+X][-X]FX}
   def baum2(n,winkel,laenge, breite)
+    if n == 0
+      @turtle.go_ahead(laenge,breite)
+      return
+    end
+    @turtle.go_ahead(laenge,breite)                        # F
+    @turtle.remember                                       # [
+    @turtle.turn_left(winkel)                              # +
+    baum2(n-1,winkel,laenge/@factor,breite/@factor)        # X
+    @turtle.restore                                        # ]
+    @turtle.remember                                       # [
+    @turtle.turn_right(winkel + 10)                        # - # Anderer Winkel
+    baum2(n-1,winkel,laenge/@factor,breite/@factor)        # X
+    @turtle.restore                                        # ]
+    @turtle.go_ahead(laenge,breite)                        # F
+    baum2(n-1,winkel,laenge/@factor,breite/@factor)        # X
   end
 
   # P = {X -> F-[[X]+X]+F+[+FX]-X}
   def baum3(n,winkel,laenge,breite)
+    if n == 0
+      @turtle.go_ahead(laenge,breite)
+      return
+    end
+    @turtle.go_ahead(laenge,breite)                        # F
+    @turtle.turn_right(winkel)                             # -
+    @turtle.remember                                       # [
+    @turtle.remember                                       # [
+    baum3(n-1,winkel,laenge/@factor,breite/@factor)        # X
+    @turtle.restore                                        # ]
+    @turtle.turn_left(winkel)                              # +
+    baum3(n-1,winkel,laenge/@factor,breite/@factor)        # X
+    @turtle.restore                                        # ]
+    @turtle.turn_left(winkel)                              # +
+    @turtle.go_ahead(laenge,breite)                        # F
+    @turtle.turn_left(winkel)                              # +
+    @turtle.remember                                       # [
+    @turtle.turn_left(winkel)                              # +
+    @turtle.go_ahead(laenge,breite)                        # F
+    baum3(n-1,winkel,laenge/@factor,breite/@factor)        # X
+    @turtle.restore                                        # ]
+    @turtle.turn_right(winkel)                             # -
+    baum3(n-1,winkel,laenge/@factor,breite/@factor)        # X
   end
 
 end
