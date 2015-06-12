@@ -3,7 +3,7 @@ require "Turtle"
 require "Point"
 
 class RekursiverBaum
-  
+
   # Konstanten für die unterschiedlichen Baumtypen
   BAUM1 = 1
   BAUM2 = 2
@@ -17,14 +17,11 @@ class RekursiverBaum
   BAUM1_WINKEL = 24.8
   BAUM2_WINKEL = 25.7
   BAUM3_WINKEL = 22.5
-  
-  
   def initialize()
     @factor = 2.0 # Faktor, um den in jedem Schritt die Länge der Strecke gekürzt wird.
   end
-  
-  
-  def zeichnen(typ,wiederholungen,x,y) 
+
+  def zeichnen(typ,wiederholungen,x,y)
     @turtle = Turtle.new(x,y,90)  # Zeichenwerkzeug
     case typ
     when BAUM1
@@ -42,17 +39,49 @@ class RekursiverBaum
     @turtle.loeschen()
   end
 
-  
   # P =  {X -> F[+X]F[-X]+X}
   def baum1(n,winkel,laenge,breite)
+    if n == 0
+      @turtle.go_ahead(laenge,breite)
+      return
+    end
+    baum1(n-1,winkel,laenge/@factor,breite)                # F
+    @turtle.remember                                       # [
+    @turtle.turn_left(winkel)                              # +
+    baum1(n-1,winkel,laenge/@factor,breite)                # X
+    @turtle.restore                                        # ]
+    baum1(n-1,winkel,laenge/@factor,breite)                # F
+    @turtle.remember                                       # [
+    @turtle.turn_right(winkel)                             # -
+    baum1(n-1,winkel,laenge/@factor,breite)                # X
+    @turtle.restore                                        # ]
+    @turtle.turn_left(winkel)                              # +
+    baum1(n-1,winkel,laenge/@factor,breite)                # X
+
+    #    if n == 0
+    #      @turtle.go_ahead(laenge,breite)
+    #      return
+    #    end
+    #    baum1(n-1,winkel,laenge/@factor,breite)                # F
+    #    @turtle.remember                                       # [
+    #    @turtle.turn_left(winkel)                              # +
+    #    baum1(n-1,winkel,laenge/@factor,breite)                # F
+    #    @turtle.restore                                        # ]
+    #    baum1(n-1,winkel,laenge/@factor,breite)                # F
+    #    @turtle.remember                                       # [
+    #    @turtle.turn_right(winkel)                             # -
+    #    baum1(n-1,winkel,laenge/@factor,breite)                # F
+    #    @turtle.restore                                        # ]
+    #    @turtle.turn_left(winkel)                              # +
+    #    baum1(n-1,winkel,laenge/@factor,breite)                # F
   end
-  
+
   # P = {X-> F[+X][-X]FX}
   def baum2(n,winkel,laenge, breite)
   end
-  
+
   # P = {X -> F-[[X]+X]+F+[+FX]-X}
   def baum3(n,winkel,laenge,breite)
   end
-  
+
 end

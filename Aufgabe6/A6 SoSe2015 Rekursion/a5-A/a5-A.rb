@@ -26,6 +26,24 @@ def a(n, m)
   end
 end
 
+def test_Ackermann
+  for n in 0 .. 4
+    for m in 0 .. 4
+      puts 'a(' + n.to_s + ', ' + m.to_s + ') : ' + a(n, m).to_s
+    end
+  end
+end
+
+def test_Ackermann_3m
+  m = 0
+  while true
+    puts 'a(3, ' + m.to_s + ') : ' + a(3, m).to_s
+    m += 1
+  end
+end
+
+#test_Ackermann_3m
+#test_Ackermann_3m
 
 #puts f(100)
 #puts Math::log(10)

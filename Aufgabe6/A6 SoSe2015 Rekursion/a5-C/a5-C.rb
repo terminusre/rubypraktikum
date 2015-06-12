@@ -10,7 +10,7 @@ def f(n, x, speicher = 0)
   if n == 0
     return speicher + 1
   else
-    return f(n - 1, x, speicher + ((-1 ** n) * (n + 1) * (x ** n)))
+    return f(n - 1, x, speicher + (((-1) ** n) * (n + 1) * (x ** n)))
   end
 end
 
