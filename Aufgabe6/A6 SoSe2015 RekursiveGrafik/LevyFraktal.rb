@@ -18,9 +18,26 @@ class LevyFraktal
   def zeichnen(n,x,y,kl)
     @turtle = Turtle.new(x,y)
     levy(n,kl)
+    
+    
   end
 
   #P = { F → +F--F+ } 
   def levy(n,kl)
+    # Abbruchbedingung: Alle Ersetzungen wurden abgeschlossen
+    # jetzt können die verkürzten Strecken gezeichnet werden
+    if n == 0
+      @turtle.go_ahead(kl)
+      return
+    end
+    # Rekursiver Aufruf - Anwendung der Ersetzungsregel: F -> F+F--F+F
+    @turtle.turn_left(@angle)                # +
+    levy(n-1,(kl/@factor).round)             # F
+     
+    @turtle.turn_right(@angle)               # -
+    @turtle.turn_right(@angle)               # -
+    levy(n-1,(kl/@factor).round)             # F
+    @turtle.turn_left(@angle)                # +
+    
   end
 end
