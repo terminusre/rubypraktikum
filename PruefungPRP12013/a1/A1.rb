@@ -44,5 +44,3 @@ require "Set"
 def schluessel_pro_wert(h)
 
 end
-
-h1 = {:a1 => Set.new([:p1,:p2,:p3,:p4]), :a2 => Set.new([:p1,:p4,:p5,:p6]), :a3 => Set.new([:p1,:p2,:p3]) }
