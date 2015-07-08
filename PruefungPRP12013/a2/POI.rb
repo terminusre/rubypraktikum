@@ -21,9 +21,37 @@ class POI
   def to_s()
     return "POI(#@name,#@geo_coord,\{#{@attachments.sort().join(",")}\}"
   end
-  # TODO
 
- 
+  def hash
+    return 1
+  end
+
+  # TODO
+  def <=>(other)
+    if other.nil?
+      return false
+    end
+    #returnfalseifself.class!= other.class
+    return[@name, @geo_coord, @attachments] <=> [other.name, other.geo_coord, other.attachments]
+  end
+
+  def ==(other)
+    if other.nil?
+      return false
+    end
+    return[@name, @geo_coord, @attachments] == [other.name, other.geo_coord, other.attachments]
+  end
+
+  def eql?(other)
+    if other.nil?
+      return false
+    end
+    if self.class!= other.class
+      return false
+    end
+    return[@name, @geo_coord, @attachments] == [other.name, other.geo_coord, other.attachments]
+  end
+
 end
 
 class Geokoordinate
@@ -37,6 +65,36 @@ class Geokoordinate
     return "(#@bg,#@lg)"
   end
 
+  def hash
+    return 1
+  end
+
+  def <=>(other)
+    if other.nil?
+      return false
+    end
+    if self.class!= other.class
+      return false
+    end
+    return[@nbg, @lg] <=> [other.bg, other.lg]
+  end
+
+  def ==(other)
+    if other.nil?
+      return false
+    end
+    return[@nbg, @lg] == [other.bg, other.lg]
+  end
+
+  def eql?(other)
+    if other.nil?
+      return false
+    end
+    if self.class!= other.class
+      return false
+    end
+    return[@nbg, @lg] == [other.bg, other.lg]
+  end
   # TODO
 
 end
@@ -50,6 +108,35 @@ class Attachment
 
   def to_s()
     "At[#@name,#@inhalt]"
+  end
+
+  def hash
+    return 1
+  end
+
+  def <=>(other)
+    if other.nil?
+      return false
+    end
+    #returnfalseifself.class!= other.class
+    return[@name, @inhalt] <=> [other.name, other.inhalt]
+  end
+
+  def ==(other)
+    if other.nil?
+      return false
+    end
+    return[@name, @inhalt] == [other.name, other.inhalt]
+  end
+
+  def eql?(other)
+    if other.nil?
+      return false
+    end
+    if self.class!= other.class
+      return false
+    end
+    return[@name, @inhalt] == [other.name, other.inhalt]
   end
 
   # TODO

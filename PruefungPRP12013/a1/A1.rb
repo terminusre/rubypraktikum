@@ -32,29 +32,22 @@ end
 # TODO Array erweitern ary_min_e_elems
 # Summe 10 Pkt
 class  Array
-  @schlecht = 0
-  def ary_min_2_elems_rec(counter)
-    if self.length > 0
-      if self[0].is_a?(Array)
-        counter += self[0].ary_min_2_elems_rec(counter)
-      end
-      if self.length > 1
-        @schlecht += 1
-        self[1 .. -1].ary_min_2_elems_rec(counter + 1)
-      end
-      return @schlecht
-    else
-      return @schlechts
-    end
-  end
-
   def ary_min_2_elems
-    return ary_min_2_elems_rec(0)
+    counter = 0
+    if self.length > 1
+      counter += 1
+    end
+    self.each { |element|
+      if element.is_a?(Array)
+        counter += element.ary_min_2_elems
+      end
+    }
+    return counter
   end
 end
 
 t = [1,[2,[3,4],[[7,[8,9]]]]]
-#print t.ary_min_2_elems
+print t.ary_min_2_elems
 
 # TODO  Methode organisiere_nach_wert(a_hash) 6 Pkt
 def organisiere_nach_wert(a_hash)
