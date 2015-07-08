@@ -11,7 +11,7 @@ class RekursiverBaum
   BAUM1_LAENGE = 100
   BAUM2_LAENGE = 100
   BAUM3_LAENGE = 50
-  BAUM1_BREITE = 10
+  BAUM1_BREITE = 1 #10 Breite festlegen
   BAUM2_BREITE = BAUM1_BREITE
   BAUM3_BREITE = BAUM1_BREITE
   BAUM1_WINKEL = 24.8
@@ -71,7 +71,7 @@ class RekursiverBaum
     baum2(n-1,winkel,laenge/@factor,breite/@factor)        # X
     @turtle.restore                                        # ]
     @turtle.remember                                       # [
-    @turtle.turn_right(winkel + 10)                        # - # Anderer Winkel
+    @turtle.turn_right(winkel) # + 10)                     # - # Anderer Winkel
     baum2(n-1,winkel,laenge/@factor,breite/@factor)        # X
     @turtle.restore                                        # ]
     @turtle.go_ahead(laenge,breite)                        # F
