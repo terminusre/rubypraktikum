@@ -32,24 +32,22 @@ class POITest < Test::Unit::TestCase
 
     @poi1_coord_diff = POI.new("Eifelturm",@coord_eifel_diff)
     @poi1_coord_diff << @at_e1 << @at_e2 << @at_e3 << @at_e4
-    
-    
+
     @poi1 << @at_e1 << @at_e2 << @at_e3 << @at_e4
     @poi2 << @at_b1 << @at_b2 << @at_b3 << @at_b4
     @poi3 << @at_c1 << @at_c2 << @at_c3 << @at_c4
 
     @poi2_clone = Marshal.load(Marshal.dump(@poi2))
-    
+
     @poi2_attachments_diff = Marshal.load(Marshal.dump(@poi2))
     @poi2_attachments_diff << @at_b3_diff << @at_b4_diff
 
-          
     @poi_ary = [@poi3,@poi1,@poi2,@poi1_coord_diff,@poi2_attachments_diff]
 
     @poi_set = Set.new()
     @poi_set2 = Set.new()
     @poi_set << @poi1 << @poi2 << @poi3
-    @poi_set2 << @poi1 << @poi2 << @poi3 
+    @poi_set2 << @poi1 << @poi2 << @poi3
 
     @poi_ary_sorted = [@poi2_attachments_diff,@poi2,@poi3,@poi1,@poi1_coord_diff]
   end
@@ -60,11 +58,11 @@ class POITest < Test::Unit::TestCase
 
   def test_no_dups_in_set()
     @poi_set2 << @poi2_clone
-    assert_equal(@poi_set2,@poi_set) 
+    assert_equal(@poi_set2,@poi_set)
   end
 
   def test_sort
-   assert_equal(@poi_ary_sorted,@poi_ary.sort())
+    assert_equal(@poi_ary_sorted,@poi_ary.sort())
   end
-  
+
 end

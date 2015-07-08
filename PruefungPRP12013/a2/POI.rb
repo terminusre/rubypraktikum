@@ -1,5 +1,5 @@
 class POI
-
+  include Comparable
   attr_reader :geo_coord, :attachments, :name
   protected :attachments
   def initialize(name, geo_coord)
@@ -22,39 +22,34 @@ class POI
     return "POI(#@name,#@geo_coord,\{#{@attachments.sort().join(",")}\}"
   end
 
+  def ==(other)
+    return false if other.nil?
+    return false if !other.is_a?(self.class)
+    return true if other.equal?(self)
+    return [@name, @geo_coord, @attachments.sort] == [other.name, other.geo_coord, other.attachments.sort]
+  end
+
   def hash
     return 1
   end
 
-  # TODO
-  def <=>(other)
-    if other.nil?
-      return false
-    end
-    #returnfalseifself.class!= other.class
-    return[@name, @geo_coord, @attachments] <=> [other.name, other.geo_coord, other.attachments]
-  end
-
-  def ==(other)
-    if other.nil?
-      return false
-    end
-    return[@name, @geo_coord, @attachments] == [other.name, other.geo_coord, other.attachments]
-  end
-
   def eql?(other)
-    if other.nil?
-      return false
-    end
-    if self.class!= other.class
-      return false
-    end
-    return[@name, @geo_coord, @attachments] == [other.name, other.geo_coord, other.attachments]
+    return false if other.nil?
+    return false if !other.is_a?(self.class)
+    return true if other.equal?(self)
+    return [@name, @geo_coord, @attachments.sort].eql?([other.name, other.geo_coord, other.attachments.sort])
   end
 
+  def <=>(other)
+    return false if other.nil?
+    return false if !other.is_a?(self.class)
+    return true if other.equal?(self)
+    return [@name, @geo_coord, @attachments.sort] <=> [other.name, other.geo_coord, other.attachments.sort]
+  end
 end
 
 class Geokoordinate
+  include Comparable
   attr_reader :bg, :lg
   def initialize(breitengrad,laengengrad)
     @bg = breitengrad
@@ -65,42 +60,36 @@ class Geokoordinate
     return "(#@bg,#@lg)"
   end
 
+  def ==(other)
+    return false if other.nil?
+    return false if !other.is_a?(self.class)
+    return true if other.equal?(self)
+    return [@bg, @lg] == [other.bg, other.lg]
+  end
+
   def hash
     return 1
   end
 
-  def <=>(other)
-    if other.nil?
-      return false
-    end
-    if self.class!= other.class
-      return false
-    end
-    return[@nbg, @lg] <=> [other.bg, other.lg]
-  end
-
-  def ==(other)
-    if other.nil?
-      return false
-    end
-    return[@nbg, @lg] == [other.bg, other.lg]
-  end
-
   def eql?(other)
-    if other.nil?
-      return false
-    end
-    if self.class!= other.class
-      return false
-    end
-    return[@nbg, @lg] == [other.bg, other.lg]
+    return false if other.nil?
+    return false if !other.is_a?(self.class)
+    return true if other.equal?(self)
+    return [@bg, @lg].eql?([other.bg, other.lg])
   end
-  # TODO
+
+  def <=>(other)
+    return false if other.nil?
+    return false if !other.is_a?(self.class)
+    return true if other.equal?(self)
+    return [@bg, @lg] <=> [other.bg, other.lg]
+  end
 
 end
 
 class Attachment
-  attr_reader :name,:inhalt
+  include Comparable
+  attr_reader :name, :inhalt
   def initialize(name,inhalt)
     @name = name
     @inhalt = inhalt
@@ -110,35 +99,28 @@ class Attachment
     "At[#@name,#@inhalt]"
   end
 
+  def ==(other)
+    return false if other.nil?
+    return false if !other.is_a?(self.class)
+    return true if other.equal?(self)
+    return [@name, @inhalt] == [other.name, other.inhalt]
+  end
+
   def hash
     return 1
   end
 
-  def <=>(other)
-    if other.nil?
-      return false
-    end
-    #returnfalseifself.class!= other.class
-    return[@name, @inhalt] <=> [other.name, other.inhalt]
-  end
-
-  def ==(other)
-    if other.nil?
-      return false
-    end
-    return[@name, @inhalt] == [other.name, other.inhalt]
-  end
-
   def eql?(other)
-    if other.nil?
-      return false
-    end
-    if self.class!= other.class
-      return false
-    end
-    return[@name, @inhalt] == [other.name, other.inhalt]
+    return false if other.nil?
+    return false if !other.is_a?(self.class)
+    return true if other.equal?(self)
+    return [@name, @inhalt].eql?([other.name, other.inhalt])
   end
 
-  # TODO
+  def <=>(other)
+    return false if other.nil?
+    return false if !other.is_a?(self.class)
+    return true if other.equal?(self)
+    return [@name, @inhalt] <=> [other.name, other.inhalt]
+  end
 end
-
