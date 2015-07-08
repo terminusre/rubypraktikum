@@ -30,7 +30,7 @@ class POI
   end
 
   def hash
-    return 1
+    return to_s.hash
   end
 
   def eql?(other)
@@ -68,7 +68,7 @@ class Geokoordinate
   end
 
   def hash
-    return 1
+    return to_s.hash
   end
 
   def eql?(other)
@@ -107,7 +107,7 @@ class Attachment
   end
 
   def hash
-    return 1
+    return to_s.hash
   end
 
   def eql?(other)

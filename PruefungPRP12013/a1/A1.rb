@@ -46,45 +46,59 @@ class  Array
   end
 end
 
-t = [1,[2,[3,4],[[7,[8,9]]]]]
-print t.ary_min_2_elems
-
-# TODO  Methode organisiere_nach_wert(a_hash) 6 Pkt
-def organisiere_nach_wert(a_hash)
-  other_hash = Hash.new
-
-  a_hash.values.map{|set| set.to_a}.flatten.each { |new_key|
-    if !other_hash.key?(new_key)
-      other_hash.store(new_key, Set.new)
-    end
-  }
-
-  a_hash.each {|pair|
-    pair[1].each { |value|
-      other_hash[value].add(pair[0])
-    }
-  }
-
-  return other_hash
-end
-
 require "Set"
 
-# TODO Methode schluessel_pro_wert(h) 4 Pkt
-def schluessel_pro_wert(a_hash)
-  other_hash = Hash.new
+#t = [1,[2,[3,4],[[7,[8,9]]]]]
+#print t.ary_min_2_elems
+h1 = {:a1 => Set.new([:p1,:p2,:p3,:p4]), :a2 => Set.new([:p1,:p4,:p5,:p6]), :a3 => Set.new([:p1,:p2,:p3]) }
 
-  a_hash.values.map{|set| set.to_a}.flatten.each { |new_key|
-    if !other_hash.key?(new_key)
-      other_hash.store(new_key, 0)
-    end
-  }
-
-  a_hash.each {|pair|
-    pair[1].each { |value|
-      other_hash[value] += 1
-    }
-  }
-
-  return other_hash
+def organisiere_nach_wert(a_hash)
+  new_hash = Hash.new
+  a_hash.values.each { |set| set.each { |value| new_hash[value] = Set.new if !new_hash.key?(value)}}
+  a_hash.each { |pair| pair[1].each { |val| new_hash[val].add(pair[0])}}
+  return new_hash
 end
+
+def schluessel_pro_wert(a_hash)
+  new_hash = Hash.new
+  organisiere_nach_wert(a_hash).each { |pair| new_hash[pair[0]] = pair[1].length }
+  return new_hash
+end
+
+## TODO  Methode organisiere_nach_wert(a_hash) 6 Pkt
+#def organisiere_nach_wert(a_hash)
+#  other_hash = Hash.new
+#
+#  a_hash.values.map{|set| set.to_a}.flatten.each { |new_key|
+#    if !other_hash.key?(new_key)
+#      other_hash.store(new_key, Set.new)
+#    end
+#  }
+#
+#  a_hash.each {|pair|
+#    pair[1].each { |value|
+#      other_hash[value].add(pair[0])
+#    }
+#  }
+#
+#  return other_hash
+#end
+
+## TODO Methode schluessel_pro_wert(h) 4 Pkt
+#def schluessel_pro_wert(a_hash)
+#  other_hash = Hash.new
+#
+#  a_hash.values.map{|set| set.to_a}.flatten.each { |new_key|
+#    if !other_hash.key?(new_key)
+#      other_hash.store(new_key, 0)
+#    end
+#  }
+#
+#  a_hash.each {|pair|
+#    pair[1].each { |value|
+#      other_hash[value] += 1
+#    }
+#  }
+#
+#  return other_hash
+#end
